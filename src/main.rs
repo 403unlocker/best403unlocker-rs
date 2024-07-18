@@ -1,11 +1,13 @@
 mod config;
 mod resolver;
+use chrono::Local;
 use config::Config;
 use futures_util::TryStreamExt;
 use reqwest::Client;
 use std::fs;
 use std::io::Write;
 use std::net::Ipv4Addr;
+use std::path::Path;
 use std::sync::Arc;
 use std::time::Duration;
 use tokio;
@@ -86,21 +88,22 @@ async fn download(
 
 fn write_result(results: Vec<(String, usize)>) {
     // Create the "output" directory if it doesn't exist
-    let output_dir = "output";
-    fs::create_dir_all(output_dir).expect("unable to create output directory");
+    let output_dir = Path::new("output");
+    fs::create_dir_all(&output_dir).expect("unable to create output directory");
 
-    // Format the file name with a timestamp
+    // Format the file name with a timestamp, replace ':' with '-'
     let file_name = format!(
-        "{}/best403unlocker_output-{}",
-        output_dir,
-        chrono::Local::now().format("%Y-%m-%d %H:%M:%S")
+        "best403unlocker_output-{}",
+        Local::now().format("%Y-%m-%d_%H-%M-%S")
     );
+
+    let file_path = output_dir.join(file_name);
 
     // Create and open the file in the "output" directory
     let mut file = fs::OpenOptions::new()
         .write(true)
         .create(true)
-        .open(file_name)
+        .open(file_path)
         .unwrap();
 
     // Write the results to the file
