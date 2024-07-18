@@ -11,5 +11,6 @@ reqwest = { version = "0.12.5", features = ["blocking", "stream"] }
 tokio = { version = "1.38.0", features = ["macros"] }
 futures-util = "0.3.30"
 trust-dns-resolver = "0.23.2"
-async-trait = "0.1.81"
 chrono = "0.4.38"
+log = "0.4.22"
+colog = "1.3.0"

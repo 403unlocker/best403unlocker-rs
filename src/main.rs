@@ -3,6 +3,7 @@ mod resolver;
 use chrono::Local;
 use config::Config;
 use futures_util::TryStreamExt;
+use log;
 use reqwest::Client;
 use std::fs;
 use std::io::Write;
@@ -14,8 +15,10 @@ use tokio;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    colog::init();
+    log::info!("starting.....");
     let config = Config::load()?;
-
+    log::info!("timeout: {}", config.timeout);
     let mut results = Vec::new();
 
     for dns in &config.dns {
@@ -23,7 +26,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let size = download(&config.file_url, ip, &config.timeout)
                 .await
                 .unwrap_or_else(|_| {
-                    println!("failed to resolve with {} dns", dns);
+                    log::warn!("failed to resolve with {} dns\n", dns);
                     0
                 });
             results.push((ip.to_string(), size));
@@ -34,13 +37,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     if let Some((best_dns, size)) = results.first() {
         if *size > 0 {
-            println!("*********************");
-            println!("Best DNS server is {}", best_dns);
-            println!("*********************");
+            log::info!("*********************");
+            log::info!("Best DNS server is {}", best_dns);
+            log::info!("*********************");
         } else {
-            println!("*********************");
-            println!("Network is not reachable");
-            println!("*********************");
+            log::info!("*********************");
+            log::info!("Network is not reachable");
+            log::info!("*********************");
         }
     }
     write_result(results);
@@ -52,7 +55,6 @@ async fn download(
     ip: Ipv4Addr,
     timeout: &str,
 ) -> Result<usize, Box<dyn std::error::Error>> {
-    println!("timeout is :{}", timeout);
     let timeout_duration =
         Duration::from_secs(timeout.trim_end_matches('s').parse::<u64>().unwrap()); // Timeout duration in seconds
 
@@ -62,9 +64,7 @@ async fn download(
         )))
         .timeout(timeout_duration)
         .build()?;
-    println!("send request");
     let response = client.get(url).send().await?;
-    println!("end request");
     let mut stream = response.bytes_stream();
     let mut downloaded_bytes = 0;
 
@@ -77,11 +77,11 @@ async fn download(
     .await;
 
     match result {
-        Ok(_) => println!("Download complete!"),
-        Err(_) => println!("Timeout reached!"),
+        Ok(_) => log::debug!("Download complete!"),
+        Err(_) => log::debug!("Timeout reached!"),
     }
 
-    println!("Downloaded bytes: {}", downloaded_bytes);
+    log::debug!("Downloaded bytes: {}", downloaded_bytes);
 
     Ok(downloaded_bytes)
 }
