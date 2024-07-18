@@ -5,18 +5,23 @@ use config::Config;
 use futures_util::TryStreamExt;
 use log;
 use reqwest::Client;
-use std::fs;
 use std::io::Write;
 use std::net::Ipv4Addr;
 use std::path::Path;
 use std::sync::Arc;
 use std::time::Duration;
+use std::{fs, panic, process};
 use tokio;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     colog::init();
     log::info!("starting.....");
+    panic::set_hook(Box::new(|_| {
+        log::error!("program exited unexpectedly");
+        // Exit with status code 1
+        process::exit(1);
+    }));
     let config = Config::load()?;
     log::info!("timeout: {}", config.timeout);
     let mut results = Vec::new();
