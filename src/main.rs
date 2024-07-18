@@ -44,14 +44,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         if *size > 0 {
             log::info!("*********************");
             log::info!("Best DNS server is {}", best_dns);
-            log::info!("*********************");
+            log::info!("*********************\n");
         } else {
             log::info!("*********************");
             log::info!("Network is not reachable");
-            log::info!("*********************");
+            log::info!("*********************\n");
         }
     }
     write_result(results);
+
+    log::info!("results saved in output directory");
     Ok(())
 }
 
