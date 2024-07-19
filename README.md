@@ -67,7 +67,7 @@ This will compile the Rust code and create a optimized, release-ready executable
 
 - On Linux:
   ```
-  cp $.\target\release\best403unlocker-rs ~/.cargo/bin
+  cp .\target\release\best403unlocker-rs ~/.cargo/bin
   ```
 - On Windows: 
     ```
