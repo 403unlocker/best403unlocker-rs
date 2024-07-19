@@ -7,7 +7,7 @@ license = "GPL-3.0-only"
 readme = "README.md"
 repository = "https://github.com/403unlocker/best403unlocker-rs"
 categories = ["command-line-utilities", "development-tools", "accessibility", "network-programming"]
-keywords = ["403", "dns", "tools", "bypass 403", "bypass"]
+keywords = ["403", "dns", "tools", "bypass-403", "bypass"]
 include = ["src/*.rs", "Cargo.toml", "LICENSE", "README.md"]
 authors = ["BrPrS"]
 
