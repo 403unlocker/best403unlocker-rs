@@ -22,7 +22,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         // Exit with status code 1
         process::exit(1);
     }));
-    let config = Config::load()?;
+    let config = Config::load().unwrap();
     log::info!("timeout: {}", config.timeout);
     let mut results = Vec::new();
 
