@@ -10,7 +10,7 @@ The primary difference is that the tool has been rewritten using the Rust progra
 
 ### Cross-platform Compatibility
 
-Thanks to amazing rust this project now supports both ***Windows*** and ***Linux***.
+Thanks to amazing rust this project now supports both **_Windows_** and **_Linux_**.
 
 ### Simplified Deployment
 
@@ -67,19 +67,21 @@ This will compile the Rust code and create a optimized, release-ready executable
 
 - On Linux:
   ```
-  cp .\target\release\best403unlocker-rs ~/.cargo/bin
+  cp ./target/release/best403unlocker-rs ~/.cargo/bin
   ```
-- On Windows: 
-    ```
-    copy .\target\release\best403unlocker-rs.exe %USERPROFILE%\.cargo\bin\
-    ```
+- On Windows:
+  ```
+  copy .\target\release\best403unlocker-rs.exe %USERPROFILE%\.cargo\bin\
+  ```
 
 The tool should now be running and ready to use.
 
-
 ## credit
+
 Many thanks to [Arman Taheri](https://github.com/ArmanTaheriGhaleTaki) for its great idea!
+
 ## Contact
+
 Fell free to open PR and issues
 
 I will try my best to answer them as soon as possible
