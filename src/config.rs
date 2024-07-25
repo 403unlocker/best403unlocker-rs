@@ -11,7 +11,7 @@ pub struct Config {
 
 impl Config {
     pub fn load() -> Result<Self, Box<dyn std::error::Error>> {
-        let config_path = Path::new("./best403unlocker.conf");
+        let config_path = Path::new("best403unlocker.conf");
         let config_content = if config_path.exists() {
             fs::read_to_string(config_path)?
         } else {
