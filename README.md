@@ -18,14 +18,17 @@ Just a single executable file and its `best403unlocker.conf` file to check for b
 
 ## How to Run the Rust Version
 
-To run the Rust-based 403 unlocker tool, there is two method:
-
-### Method 1 - using released version ( perfered )
+To run the Rust-based 403 unlocker tool, there is 3 method:
+### Method 1 - (**--NEW--**) using apt (best for debian and ubuntu users) 
+1. Download the latest `.deb` version of the app
+2. Go to the directory that file has been downloaded into.
+3. Simply install app using `sudo apt install ./best403unlocker<version>.deb`
+### Method 2 - using released version ( perfered )
 
 1. just download the latest released version base on your OS from [releases](https://github.com/403unlocker/best403unlocker-rs/releases/).
 2. unzip and run the program (pay attention that .conf file and the executable file should be in the same directory)
 
-### Method 2 - build form source ( suitable for development )
+### Method 3 - build form source ( suitable for development )
 
 #### Prerequisites
 
